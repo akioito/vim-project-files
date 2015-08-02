@@ -1,0 +1,5 @@
+# sample.vim-prj
+README.md
+plugin/*.vim
+
+# cmd: set tags=tags
