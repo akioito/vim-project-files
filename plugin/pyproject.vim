@@ -23,13 +23,14 @@ let loaded_pyproject = 1
 " 2. BufOnly plugin
 "
 " How to use:
-"  1.Generate project file, file with .pyprj extension
-"   find .. -name '*.*' |egrep '\.py$|\.css$|\.ini$|\.html$'  >myProject.pyprj
+"  1.Generate project file, file with .vim-prj extension
+"   find .. -name '*.*' |egrep '\.py$|\.css$|\.ini$|\.html$' > myProject.vim-prj
 "  2.Open generated project
-"  3.To open all project files   => :PyOpenProject
+"  3.To open all project files
+"    :PyOpenProject
 
 " Sample project files
-" # node - sample.pyprj
+" # node - myProject.vim-prj
 " *.js
 " routes/*.js
 " public/*.html
