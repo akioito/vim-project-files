@@ -1,18 +1,15 @@
 To Use:
-
 Copy this folder to  Pathogen bundle folder or
 NeoBundle 'akioito/vim-project-files'
 
-
-Put sample.vim-prj in top of your project folder:
+Put sample.vim-prj on top of your project folder:
 sample.vim-prj
 README
-plugin/pyproject.vim
+plugin/*.vim
 
-Customize as need... 
+Customize as needed... 
 
-
-Open sample.pyprj and issue the vim command
+Open sample.pyprj and issue vim command
 :PyOpenProject
 And voila, all files are open!
 
