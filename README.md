@@ -1,13 +1,18 @@
 To Use:
+
 Copy this folder to  Pathogen bundle folder or
+
 NeoBundle 'akioito/vim-project-files'
 
 
 Put sample.vim-prj in top of your project folder:
 
 sample.vim-prj
+
 README
+
 plugin/pyproject.vim
+
 Customize as need... 
 
 
