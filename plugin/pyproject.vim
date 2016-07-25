@@ -57,7 +57,8 @@ cwdir = cwdir.replace(' ','\\ ')
 xFiles = []
 for line in vim.current.buffer[:]: 
     if line and not line.startswith('#'):
-        vim.command("next %s" % line)
+        vim.command("silent next %s" % line)
+        vim.command('redraw | echom "%s"' % line)
         os.chdir(cwdir)
     if line and line.find('# cmd:') >= 0:  # Arbitrary vim command
         vim.command(line.split('# cmd:')[1]) 
