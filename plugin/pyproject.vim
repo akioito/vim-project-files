@@ -44,14 +44,14 @@ function! s:OpenProjectFiles()
 if !exists("g:currProject")
     return
 endif
+let s:path = expand('<sfile>:p:h')
 Py << EOF
-import os
 import vim 
 
 currentProject = vim.eval("g:currProject").replace(' ','\\ ')
 vim.command("silent edit %s" % currentProject)
 vim.command("silent BufOnly")
-cwdir = os.getcwd() # relative to g:currProject
+cwdir = vim.eval('s:path')
 cwdir = cwdir.replace(' ','\\ ')
 
 xFiles = []
@@ -59,7 +59,7 @@ for line in vim.current.buffer[:]:
     if line and not line.startswith('#'):
         vim.command("silent next %s" % line)
         vim.command('redraw | echom "%s"' % line)
-        os.chdir(cwdir)
+        vim.chdir(cwdir)
     if line and line.find('# cmd:') >= 0:  # Arbitrary vim command
         vim.command(line.split('# cmd:')[1]) 
 print(' ')
