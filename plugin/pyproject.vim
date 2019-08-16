@@ -47,21 +47,33 @@ endif
 let s:path = expand('<sfile>:p:h')
 Py << EOF
 import vim 
+import os
+from glob import glob
+from os.path import abspath
 
 currentProject = vim.eval("g:currProject").replace(' ','\\ ')
 vim.command("silent edit %s" % currentProject)
 vim.command("silent BufOnly")
 cwdir = vim.eval('s:path')
 cwdir = cwdir.replace(' ','\\ ')
+os.chdir(cwdir)
 
-xFiles = []
+files_list = []
+vim_command = []
 for line in vim.current.buffer[:]: 
     if line and not line.startswith('#'):
-        vim.command("silent next %s" % line)
-        vim.command('echon "%s"' % line)
-        vim.chdir(cwdir)
-    if line and line.find('# cmd:') >= 0:  # Arbitrary vim command
-        vim.command(line.split('# cmd:')[1]) 
+        files_list += glob(line)
+    if line and line.find('# cmd:') >= 0:  # Arbitrary vim command  
+        vim_command += line.split('# cmd:')[1]
+    
+for file in files_list:
+    file_path = abspath(file)
+    vim.command("silent edit %s" % file_path)
+    vim.command('echon "%s"' % file_path)
+    vim.chdir(cwdir)
+    
+for cmd in vim_command: 
+    vim.command(cmd)
 EOF
 endfunction
 
