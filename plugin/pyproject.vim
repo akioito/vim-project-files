@@ -49,7 +49,7 @@ Py << EOF
 import vim 
 import os
 from glob import glob
-from os.path import abspath
+from os.path import abspath, basename
 
 currentProject = vim.eval("g:currProject").replace(' ','\\ ')
 vim.command("silent edit %s" % currentProject)
@@ -66,12 +66,15 @@ for line in vim.current.buffer[:]:
     if line and line.find('# cmd:') >= 0:  # Arbitrary vim command  
         vim_command += line.split('# cmd:')[1]
     
-for file in files_list:
-    file_path = abspath(file)
-    vim.command("silent edit %s" % file_path)
-    vim.command('echon "%s"' % file_path)
+for xfile in files_list:
+    vim.command("silent badd %s" % abspath(xfile))
     vim.chdir(cwdir)
     
+vim.command("brewind")
+vim.command("bufdo bnext")
+vim.command("syntax enable")
+vim.command("buffer %s" % basename(xfile)) 
+
 for cmd in vim_command: 
     vim.command(cmd)
 EOF
