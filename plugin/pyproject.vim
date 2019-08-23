@@ -70,8 +70,8 @@ for xfile in files_list:
     vim.command("silent badd %s" % abspath(xfile))
     vim.chdir(cwdir)
     
-vim.command("brewind")
-vim.command("bufdo bnext")
+# vim.command("brewind")
+# vim.command("bufdo bnext")
 vim.command("syntax enable")
 vim.command("buffer %s" % basename(xfile)) 
 
