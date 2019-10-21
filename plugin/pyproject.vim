@@ -64,7 +64,7 @@ for line in vim.current.buffer[:]:
     if line and not line.startswith('#'):
         files_list += glob(line)
     if line and line.find('# cmd:') >= 0:  # Arbitrary vim command  
-        vim_command += line.split('# cmd:')[1]
+        vim_command.append(line.split('# cmd:')[1]) 
     
 for xfile in files_list:
     vim.command("silent badd %s" % abspath(xfile))
