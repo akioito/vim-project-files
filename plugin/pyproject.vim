@@ -1,7 +1,7 @@
 " File: pyproject.vim
 " Author: Akio Ito
-" Version: 0.6
-" Last Modified: Aug 2 2015
+" Version: 0.7
+" Last Modified: Jun 25 2020
 "
 "-----------------------------------------------------------------------------
 if has("python3")
@@ -65,9 +65,12 @@ for line in vim.current.buffer[:]:
         files_list += glob(line)
     if line and line.find('# cmd:') >= 0:  # Arbitrary vim command  
         vim_command.append(line.split('# cmd:')[1]) 
-    
+
 for xfile in files_list:
-    vim.command("silent badd %s" % abspath(xfile))
+    # vim.command("silent badd %s" % abspath(xfile)) # Speedy, but sometimes has problem with japanese char (mojibake) 
+    file_path = abspath(xfile)
+    vim.command("silent edit %s" % file_path)
+    vim.command('echon "%s"' % file_path)
     vim.chdir(cwdir)
     
 # vim.command("brewind")
