@@ -67,10 +67,10 @@ for line in vim.current.buffer[:]:
         vim_command.append(line.split('# cmd:')[1]) 
 
 for xfile in files_list:
-    # vim.command("silent badd %s" % abspath(xfile)) # Speedy, but sometimes has problem with japanese char (mojibake) 
-    file_path = abspath(xfile)
-    vim.command("silent edit %s" % file_path)
-    vim.command('echon "%s"' % file_path)
+    vim.command("silent badd %s" % abspath(xfile)) 
+    # file_path = abspath(xfile)
+    # vim.command("silent edit %s" % file_path)
+    # vim.command('echon "%s"' % file_path)
     vim.chdir(cwdir)
     
 # vim.command("brewind")
