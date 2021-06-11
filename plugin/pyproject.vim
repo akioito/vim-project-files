@@ -55,8 +55,6 @@ currentProject = vim.eval("g:currProject").replace(' ','\\ ')
 vim.command("silent edit %s" % currentProject)
 vim.command("silent BufOnly")
 cwdir = vim.eval('s:path')
-cwdir = cwdir.replace(' ','\\ ')
-os.chdir(cwdir)
 
 files_list = []
 vim_command = []
@@ -68,13 +66,7 @@ for line in vim.current.buffer[:]:
 
 for xfile in files_list:
     vim.command("silent badd %s" % abspath(xfile)) 
-    # file_path = abspath(xfile)
-    # vim.command("silent edit %s" % file_path)
-    # vim.command('echon "%s"' % file_path)
-    vim.chdir(cwdir)
     
-# vim.command("brewind")
-# vim.command("bufdo bnext")
 vim.command("syntax enable")
 vim.command("buffer %s" % basename(xfile)) 
 
