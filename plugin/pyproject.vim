@@ -41,10 +41,6 @@ let loaded_pyproject = 1
 
 "-----------------------------------------------------------------------------
 function! s:OpenProjectFiles()
-if !exists("g:currProject")
-    return
-endif
-let s:path = expand('<sfile>:p:h')
 Py << EOF
 import vim 
 import os
@@ -54,8 +50,7 @@ from os.path import abspath, basename
 currentProject = vim.eval("g:currProject").replace(' ','\\ ')
 vim.command("silent edit %s" % currentProject)
 vim.command("silent BufOnly")
-cwdir = vim.eval('s:path')
-
+vim.command("silent! :lcd %:p:h")
 files_list = []
 vim_command = []
 for line in vim.current.buffer[:]: 
@@ -77,5 +72,8 @@ endfunction
 
 command! PyOpenProject call s:OpenProjectFiles()
 
-autocmd BufEnter *.pyprj   let g:currProject = expand('%:p')
-autocmd BufEnter *.vim-prj let g:currProject = expand('%:p')
+augroup pyprj_autocmd
+    autocmd!  
+    autocmd BufEnter *.pyprj   let g:currProject = expand('%:p')
+    autocmd BufEnter *.vim-prj let g:currProject = expand('%:p')
+augroup end 
