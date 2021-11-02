@@ -1,7 +1,7 @@
 " File: pyproject.vim
 " Author: Akio Ito
-" Version: 0.7
-" Last Modified: Jun 25 2020
+" Version: 0.8
+" Last Modified: nov 02 2021
 "
 "-----------------------------------------------------------------------------
 if has("python3")
