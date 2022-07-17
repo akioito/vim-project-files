@@ -1,5 +1,6 @@
 Install
 Plug 'akioito/vim-project-files'
+  noremap op :PyOpenProject<CR>
 
 Put sample.vim-prj on top of your project folder:
 sample.vim-prj
@@ -8,8 +9,9 @@ plugin/*.vim
 
 Rename and customize as needed...
 
-Open sample.pyprj and issue vim command
-:PyOpenProject
+Open my_project.vim-prj and issue vim command
+:PyOpenProject 
+Or type 'op' in normal mode
 And voila, all files are open!
 
 ---------------------------------------------
