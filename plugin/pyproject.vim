@@ -19,7 +19,7 @@ endif
 let loaded_pyproject = 1
 
 " Dependency
-" 1. Only tested with MacVim 
+" 1. Tested with MacVim, Vimr, Neovide, nvim, vim 
 " 2. BufOnly plugin
 "
 " How to use:

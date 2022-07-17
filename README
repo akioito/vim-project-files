@@ -1,13 +1,12 @@
-To Use:
-Copy this folder to  Pathogen bundle folder or
-NeoBundle 'akioito/vim-project-files'
+Install
+Plug 'akioito/vim-project-files'
 
 Put sample.vim-prj on top of your project folder:
 sample.vim-prj
 README
 plugin/*.vim
 
-Customize as needed... 
+Rename and customize as needed...
 
 Open sample.pyprj and issue vim command
 :PyOpenProject
@@ -17,9 +16,9 @@ And voila, all files are open!
 Merits of this plugin:
 Simple config file to open all project files
 Very very simple Python code, customize it as you need ...
+Tested with MacVim, Vimr, Neovide, nvim, vim
 
 Demerits:
-Only tested with MacVim
 Not suitable for very large project, in this case is better to use "git grep" /C-Scope / GNU ID Utils ...
 
 Dependencies:
