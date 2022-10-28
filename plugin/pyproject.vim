@@ -60,7 +60,8 @@ for line in vim.current.buffer[:]:
         vim_command.append(line.split('# cmd:')[1]) 
 
 for xfile in files_list:
-    vim.command("silent badd %s" % abspath(xfile)) 
+    if '.min.' not in xfile:
+        vim.command("silent badd %s" % abspath(xfile)) 
     
 vim.command("syntax enable")
 vim.command("buffer %s" % basename(xfile)) 
