@@ -1,7 +1,7 @@
 " File: pyproject.vim
 " Author: Akio Ito
-" Version: 0.8
-" Last Modified: nov 02 2021
+" Version: 0.9
+" Last Modified: mar 16 2023
 "
 "-----------------------------------------------------------------------------
 if has("python3")
@@ -35,14 +35,14 @@ let loaded_pyproject = 1
 " routes/*.js
 " public/*.html
 " public/js/*.js
-" # cmd: bdelete app.ugly.js 
-" public/css/*.css       
+" # cmd: bdelete app.ugly.js
+" public/css/*.css
 " # cmd: set tags=tags,/Volumes/test/var/www/p/tags
 
 "-----------------------------------------------------------------------------
 function! s:OpenProjectFiles()
 Py << EOF
-import vim 
+import vim
 import os
 from glob import glob
 from os.path import abspath, basename
@@ -53,20 +53,19 @@ vim.command("silent BufOnly")
 vim.command("silent! :lcd %:p:h")
 files_list = []
 vim_command = []
-for line in vim.current.buffer[:]: 
+for line in vim.current.buffer[:]:
     if line and not line.startswith('#'):
         files_list += glob(line)
-    if line and line.find('# cmd:') >= 0:  # Arbitrary vim command  
-        vim_command.append(line.split('# cmd:')[1]) 
+    if line and line.find('# cmd:') >= 0:  # Arbitrary vim command
+        vim_command.append(line.split('# cmd:')[1])
 
 for xfile in files_list:
     if '.min.' not in xfile:
-        vim.command("silent badd %s" % abspath(xfile)) 
-    
-vim.command("syntax enable")
-vim.command("buffer %s" % basename(xfile)) 
+        vim.command("silent badd %s" % abspath(xfile))
 
-for cmd in vim_command: 
+vim.command("buffer %s" % basename(xfile))
+
+for cmd in vim_command:
     vim.command(cmd)
 EOF
 endfunction
@@ -74,7 +73,7 @@ endfunction
 command! PyOpenProject call s:OpenProjectFiles()
 
 augroup pyprj_autocmd
-    autocmd!  
+    autocmd!
     autocmd BufEnter *.pyprj   let g:currProject = expand('%:p')
     autocmd BufEnter *.vim-prj let g:currProject = expand('%:p')
 augroup end 
