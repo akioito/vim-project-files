@@ -1,7 +1,7 @@
 " File: pyproject.vim
 " Author: Akio Ito
-" Version: 0.9
-" Last Modified: mar 16 2023
+" Version: 0.10
+" Last Modified: sept 21 2023
 "
 "-----------------------------------------------------------------------------
 if has("python3")
@@ -47,8 +47,8 @@ import os
 from glob import glob
 from os.path import abspath, basename
 
-currentProject = vim.eval("g:currProject").replace(' ','\\ ')
-vim.command("silent edit %s" % currentProject)
+# currentProject = vim.eval("g:currProject").replace(' ','\\ ')
+# vim.command("silent edit %s" % currentProject)
 vim.command("silent BufOnly")
 vim.command("silent! :lcd %:p:h")
 files_list = []
@@ -72,8 +72,8 @@ endfunction
 
 command! PyOpenProject call s:OpenProjectFiles()
 
-augroup pyprj_autocmd
-    autocmd!
-    autocmd BufEnter *.pyprj   let g:currProject = expand('%:p')
-    autocmd BufEnter *.vim-prj let g:currProject = expand('%:p')
-augroup end 
+" augroup pyprj_autocmd
+"     autocmd!
+"     autocmd BufEnter *.pyprj   let g:currProject = expand('%:p')
+"     autocmd BufEnter *.vim-prj let g:currProject = expand('%:p')
+" augroup end 
