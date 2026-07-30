@@ -45,7 +45,7 @@ Py << EOF
 import vim
 import os
 from glob import glob
-from os.path import abspath, basename
+from os.path import abspath
 
 vim.command("silent BufOnly")
 vim.command("silent! :lcd %:p:h")
@@ -57,11 +57,16 @@ for line in vim.current.buffer[:]:
     if line and line.find('# cmd:') >= 0:  # Arbitrary vim command
         vim_command.append(line.split('# cmd:')[1])
 
+last_file = None
 for xfile in files_list:
     if '.min.' not in xfile:
-        vim.command("silent badd %s" % abspath(xfile))
+        last_file = abspath(xfile)
+        vim.command("silent badd %s" % last_file)
 
-vim.command("silent buffer %s" % basename(xfile))
+# Full path, not basename: basename is a pattern, so duplicates such as
+# Rust's src/*/mod.rs raise E93 (More than one match)
+if last_file:
+    vim.command("silent edit %s" % last_file)
 
 for cmd in vim_command:
     vim.command(cmd)
